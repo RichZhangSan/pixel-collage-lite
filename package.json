@@ -1,0 +1,11 @@
+{
+  "name": "pixel-collage-lite",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "check": "node --check server.js && node --check lib/replicate.js && node --check lib/rate-limit.js && node --check lib/load-env.js && node --check api/collage.js && node --check api/health.js && node --check public/app.js",
+    "test": "node --test"
+  }
+}

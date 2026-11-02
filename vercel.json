@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "builds": [
+    { "src": "api/collage.js", "use": "@vercel/node" },
+    { "src": "api/health.js", "use": "@vercel/node" },
+    { "src": "public/**", "use": "@vercel/static" }
+  ],
+  "routes": [
+    { "src": "/api/collage", "dest": "/api/collage.js" },
+    { "src": "/api/health", "dest": "/api/health.js" },
+    { "src": "/(.*)", "dest": "/public/$1" }
+  ]
+}

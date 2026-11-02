@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="轻量的云端分割与浏览器拼贴工具" />
+    <title>极简解构拼贴</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="masthead">
+        <div>
+          <p class="eyebrow">PIXEL COLLAGE / STATIC EDITION</p>
+          <h1>极简解构拼贴</h1>
+          <p class="dek">云端识别主体，浏览器完成撕纸贴纸、构图与导出。</p>
+        </div>
+        <div class="status-pill" id="apiStatus">等待配置</div>
+      </header>
+
+      <section class="workspace">
+        <aside class="controls panel">
+          <div class="section-label">01 / 输入</div>
+          <label class="dropzone" id="dropzone" for="fileInput">
+            <input id="fileInput" type="file" accept="image/png,image/jpeg,image/webp" />
+            <span class="drop-icon">＋</span>
+            <strong id="fileLabel">选择一张图片</strong>
+            <small>支持 JPG、PNG、WebP，浏览器会先压缩到适合处理的尺寸</small>
+          </label>
+
+          <div class="preview-wrap hidden" id="previewWrap">
+            <img id="previewImage" alt="待处理图片预览" />
+            <button class="text-button" id="clearButton" type="button">移除图片</button>
+          </div>
+
+          <div class="section-label section-spaced">02 / 构图参数</div>
+          <div class="field">
+            <div class="field-head"><label for="count">贴纸数量</label><output id="countValue">5</output></div>
+            <input id="count" type="range" min="3" max="7" value="5" />
+          </div>
+          <div class="field">
+            <label for="style">拼贴风格</label>
+            <select id="style">
+              <option value="editorial">编辑拼版</option>
+              <option value="diagonal">对角线漂移</option>
+              <option value="scattered">边缘散落</option>
+              <option value="stacked">纸片叠放</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="background">画布背景</label>
+            <select id="background">
+              <option value="original">保留原图背景</option>
+              <option value="paper">米白纸张</option>
+              <option value="gray">暖灰纸张</option>
+              <option value="transparent">透明背景</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="seed">随机种子</label>
+            <input id="seed" type="number" value="20261102" min="0" step="1" />
+          </div>
+
+          <button class="primary-button" id="generateButton" type="button" disabled>生成拼贴</button>
+          <p class="privacy-note">图片会发送到你配置的云端分割服务。页面本身不保存图片，也不会把 API Key 放进前端。</p>
+        </aside>
+
+        <section class="result panel">
+          <div class="result-head">
+            <div>
+              <div class="section-label">03 / 输出</div>
+              <h2>静态拼贴画布</h2>
+            </div>
+            <button class="secondary-button" id="downloadButton" type="button" disabled>下载 PNG</button>
+          </div>
+          <div class="canvas-stage" id="canvasStage">
+            <div class="empty-state" id="emptyState">
+              <div class="empty-mark">✦</div>
+              <p>上传图片后，生成结果会出现在这里</p>
+              <small>主体识别与 mask 生成由云端完成，贴纸合成在浏览器中完成。</small>
+            </div>
+            <canvas id="resultCanvas" class="hidden"></canvas>
+          </div>
+          <div class="result-meta" id="resultMeta">尚未生成</div>
+        </section>
+      </section>
+
+      <footer>
+        <span>Pixel Collage Lite</span>
+        <span>云端分割 · 本地合成 · 静态导出</span>
+      </footer>
+    </main>
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>
